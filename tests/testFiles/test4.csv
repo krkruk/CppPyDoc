@@ -1,0 +1,11 @@
+Namespace;Function;Description
+TheClass;void hello1a();This function says hello
+TheClass;void hello1b();This function says hello
+TheClass;void hello1c();This function says hello
+TheClass;void hello1d();This function says hello
+TheClass;void hello1e();This function says hello
+TheClass;void hello1f();This function says hello
+TheInline;void helloInLine1a();Hello inline
+TheInline;void helloInLine1b();Hello inline
+TheInline;void helloInLine1c();Hello inline
+TheInline;void helloInLine1d();Hello inline

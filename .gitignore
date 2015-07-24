@@ -1,0 +1,10 @@
+#compiled files
+__pycache__
+
+#eclipse files
+.pydevproject
+.project
+
+#Temp files
+*.csv~
+*.cpp~

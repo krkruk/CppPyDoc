@@ -1,0 +1,6 @@
+void func1a()
+void func2a()
+void func1b()
+void func2b()
+int func3a(float a, double b = 1.0f, bool c=false)
+int func3b(float a, double b = 1.0f, bool c=false)

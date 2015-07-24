@@ -1,0 +1,4 @@
+Namespace;Function;Description
+::;std::vector &foo1a();Return a vector1a
+::;std::vector &foo1b();Return a vector1b
+::;std::vector &foo1c();Return a vector1c

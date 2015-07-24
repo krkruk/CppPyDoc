@@ -1,0 +1,6 @@
+Namespace;Function;Description
+TheClass;void foo(int b, QString &name, QString defaultName = QString(""), bool isTrue=false);wierd function example
+TheNS::TheClass::TheFooClass;void fooNoComment(const QString &txt, std::vector<int> i, const std::vector<int> &input, float z = 15.02f) noexcept;EMPTY
+TheNS::TheClass::TheFooClass;void fooX(const QString &txt, std::vector<int> i, const std::vector<int> &input, float z = 15.02f) noexcept;EMPTY
+TheNS::TheClass::TheFooClass;int fooConst(const QString &txt, std::vector<int> i, const std::vector<int> &input, float z = 15.02f) const noexcept;EMPTY
+
