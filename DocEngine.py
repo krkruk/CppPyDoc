@@ -1,11 +1,5 @@
 import re
-
-class NoDocTextFoundException(Exception):
-    def __init__(self, value):
-        self.value = value
-        
-    def __str(self):
-        print("EXCEPTION: {}".format(self.value))
+from ParseEngineAbstract import *
         
 class DocFuncBody(object):
     """Find and parse documentation string in the file."""
@@ -82,14 +76,13 @@ class DocFuncName(object):
             return data
         pass
 
-class DocEngine(object):
+class DocEngine(ParseEngineAbstract):
     """Parsing engine for a single file. The object init requires
     file name to the file. In order to parse a file a parse method
     must be called."""
-    def __init__(self, fileName):
-        with open(fileName, "r") as f:
-            self._dataLines = f.readlines()
-            
+    def __init__(self, fileName, ext = "cpp"):
+        self._ext = ext
+        self.loadFile(fileName)
         self._rePatternFunction = """
                     (const|constexpr|static|friend
                     \[\[noreturn\]\]|virtual|inline

@@ -1,0 +1,30 @@
+Namespace;Function;Description
+::;void func1a();Comment1a
+::;void func2a();Comment2a
+::;void func1b();Comment1b
+::;void func2b();Comment2b
+::;int func3a(float a, double b = 1.0f, bool c=false);Doc string func3a line2
+::;int func3b(float a, double b = 1.0f, bool c=false);Doc string func3b line2
+::;QString func4a(const QString& str) const;Return the string
+::;QString func4b(const QString& str) const;Return the string
+::;QString func4c(const QString& str) const;Return the string
+::;QString func4d(const QString& str) const;Return the string
+::;QString func4e(const QString& str) const;Return the string
+::;QString func4f(const QString& str) const;Return the string
+::;std::vector &foo1a();Return a vector1a
+::;std::vector &foo1b();Return a vector1b
+::;std::vector &foo1c();Return a vector1c
+TheClass;void hello1a();This function says hello
+TheClass;void hello1b();This function says hello
+TheClass;void hello1c();This function says hello
+TheClass;void hello1d();This function says hello
+TheClass;void hello1e();This function says hello
+TheClass;void hello1f();This function says hello
+TheInline;void helloInLine1a();Hello inline
+TheInline;void helloInLine1b();Hello inline
+TheInline;void helloInLine1c();Hello inline
+TheInline;void helloInLine1d();Hello inline
+TheClass;void foo(int b, QString &name, QString defaultName = QString(""), bool isTrue=false);wierd function example
+TheNS::TheClass::TheFooClass;void fooNoComment(const QString &txt, std::vector<int> i, const std::vector<int> &input, float z = 15.02f) noexcept;EMPTY
+TheNS::TheClass::TheFooClass;void fooX(const QString &txt, std::vector<int> i, const std::vector<int> &input, float z = 15.02f) noexcept;EMPTY
+TheNS::TheClass::TheFooClass;int fooConst(const QString &txt, std::vector<int> i, const std::vector<int> &input, float z = 15.02f) const noexcept;EMPTY
