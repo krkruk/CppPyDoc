@@ -11,5 +11,9 @@ int TheNS::foo(int a, int b = 0) {
      return b;
 }
 
-The doc string can be also an inline documentation (use "//"). The file
-the format is irrelevant.
+The doc string can be also an inline documentation (use "//").
+
+Use:
+===
+python3 CppPyDoc.py --source="source_file_or_directory" --destination="final_doc_file.csv"
+Optional parameter: --recursive: seek for files recursively in directory given in source parameter
