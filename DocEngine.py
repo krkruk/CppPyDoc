@@ -6,7 +6,9 @@ class DocFuncBody(object):
     def __init__(self):
         self.getDocScope = """
                             \/\*                                     #find "/*"
-                            (.*)
+                            ([\w\s\t\,\.\&\*\:\"\'                        #paramteres
+                            \=\<\>\!\(\)\<\>\?\[\]
+                            \+\-\/\@\#\$\%\^\|]*)
                             \*\/                                     #closing "*/"
                            """
         self.getDocInline = """

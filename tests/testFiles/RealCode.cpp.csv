@@ -1,4 +1,4 @@
-Coordinate;void setDirection(char dirn);
-NMEA_VTG;void setSpeedKmH(char *KmH);EMPTY
-TractionDriver;void onJoyChanged(const Joystick &newState);EMPTY
-CLASS;void func1(char *str, bool isConnected = false);doc line 1,
+Coordinate;void setDirection(char dirn);Set direction of the coordinate according to the standards. Input: N, E - positive values S, W - negative values The function should be called once after setCoordinate()
+NMEA_VTG;void setSpeedKmH(char *KmH);Set Speed in Km/h in float variable based on string input
+TractionDriver;void onJoyChanged(const Joystick &newState);This function reads data from joystick everytime there is update of it. First it checks if joy is still connected (to prevent reading from ampty list). If joystick is connected, position of proper axes are readed. Then dead zone of joy (lower limit) and max power is calculated. Next step is to calculete averege and send it to rover.
+CLASS;void func1(char *str, bool isConnected = false);doc line 1, doc line 2, doc line 3
