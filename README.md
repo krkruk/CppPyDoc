@@ -10,10 +10,19 @@ int TheNS::foo(int a, int b = 0) {
      */
      return b;
 }
-
-The doc string can be also an inline documentation (use "//").
+or:
+void TheNS::foo(int c, QString h)
+{
+    //doc string line 1
+    //doc string line 2
+    some_code_here();
+    return;
+}
+The doc string can be also described as an inline documentation (use "//").
 
 Use:
 ===
 python3 CppPyDoc.py --source="source_file_or_directory" --destination="final_doc_file.csv"
 Optional parameter: --recursive: seek for files recursively in directory given in source parameter
+
+It is possible to use shorter forms of --source, --destination, --recursive as follows -s "string" -d "string" -r
