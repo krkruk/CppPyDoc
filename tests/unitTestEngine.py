@@ -197,7 +197,24 @@ class Test_SplitFunctionContent(unittest.TestCase):
         for fN, fB, toCheck in zip(self.funcNameTEST1, self.funcBodyTEST1, data):
             self.assertEqual(fN, toCheck[0], "{} IS NOT {}".format(fN, toCheck[0]))
             self.assertEqual(fB, toCheck[1], "{} IS NOT {}".format(fB, toCheck[1]))
+
+class Test_FuncBodyFromRealFile(unittest.TestCase):
+    def setUp(self):
+        self.de = DocEngine.DocEngine("testFiles/RealCode.cpp")
+        self.realCode = loadFile("testFiles/RealCode.cpp")
+        lineIter = iter(self.realCode)
+        self.splitData = self.de.splitFunction(lineIter)
         
+        self.csvData = []
+        with open("testFiles/RealCode.csv", "r") as f:
+            for line in f:
+                self.csvData.append(line.rstrip().split(';'))
+    def test_testUnusualBodyContent(self):
+        bodyParser = DocEngine.DocFuncBody()
+        for comp, toComp in zip(self.csvData, self.splitData):
+            fB = bodyParser.getComment(toComp[1])
+            self.assertEqual(comp[2], fB, "Expected : To Compare: {} !!!=== {}".format(comp[2], fB))
+            
 
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testName']

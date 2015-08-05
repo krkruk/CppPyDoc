@@ -5,10 +5,9 @@ class DocFuncBody(object):
     """Find and parse documentation string in the file."""
     def __init__(self):
         self.getDocScope = """
-                            \/\*                                    #find "/*"
-                            ([\s\w\*\;\'\"\.\,\?                    #comment content
-                            \!\@\#\$\%\^\&\(\)\=\_\-]*)
-                            \*\/                                    #closing "*/"
+                            \/\*                                     #find "/*"
+                            (.*)
+                            \*\/                                     #closing "*/"
                            """
         self.getDocInline = """
                             \/\/                                    #find "//"
@@ -25,22 +24,49 @@ class DocFuncBody(object):
         dInline = self.reGetDocInline.search(bodyContent)
 
         if dScope or dInline:
-            comment = (dScope if dScope else dInline)
-            try:
-                docData = comment.group(1)
-                docBeg = comment.start(1)
-                
-                if docData[docBeg] == bodyContent[docBeg]:
+            docData = ""
+            if(dScope):
+                try:
+                    docData = dScope.group(1)
+                    docBeg = dScope.start(1)
+                    if( docData[docBeg] == bodyContent[docBeg]  #if comment is found but it is not
+                        and bodyContent[docBeg].isalnum() ):     #at the begining then no comment at all
+                        return "EMPTY"              
+                    
+                except:
                     return "EMPTY"
-                
-                docData = docData.replace(" *", "", docData.count(" *"))
-                docData = docData.replace("\\n", "", docData.count(""))
-                docData = re.sub(r"\s+", ' ', docData)              
-                docData = docData.lstrip().rstrip()
-                return docData
-            except:
-                return "EMPTY"
-          
+            else:   #parse inline documentation
+                try:
+                    docSet = []
+                    docEnd = dInline.end(1)
+                    docEndPrev = dInline.start(1)
+                    docBeg = dInline.start(1)   #first group starts always at 3 pos
+                                                #but it is needed to add two additional chars                 
+
+                    docBegPrev = docBeg + 2     #magic
+                    try:
+                        while docEndPrev < docEnd:      #find another // comments
+                            docSet.append(dInline.group(1))
+                            dInline = self.reGetDocInline.search(bodyContent[docEnd:])
+                            docEndPrev, docEnd = docEnd, dInline.end(1) + docEnd
+                            if docBegPrev != dInline.start(1):
+                                break;
+                    except:
+                        pass
+
+                    docData = " ".join(docSet)
+                    if( docData[docBeg] == bodyContent[docBeg]  #if comment is found but it is not placed
+                        and bodyContent[docBeg].isalnum() ):     #at the begining then no comment at all
+                        return "EMPTY"
+
+                except: return "EMPTY"
+                  
+            docData = docData.replace(" *", "", docData.count(" *"))
+            docData = docData.replace("--", "", docData.count("--"))
+            docData = docData.replace("\\n", "", docData.count(""))
+            docData = re.sub(r"\s+", ' ', docData)              
+            docData = docData.lstrip().rstrip()
+            return docData
         else:
             raise NoDocTextFoundException("DOC COMMENT NOT FOUND IN: {}".format(bodyContent))
     
@@ -169,7 +195,7 @@ class DocEngine(ParseEngineAbstract):
                        or openBCount == 0):
                     nextRow = next(lineIter)
                     nextRow = nextRow + '\\n' if nextRow.find("//") >= 0 else nextRow
-                    funcContent.append(nextRow.lstrip().rstrip(" "))
+                    funcContent.append(nextRow.lstrip().rstrip())
                     openBCount, closeBCount = self.__updateBracketCounter(nextRow, openBCount, closeBCount, '{', '}')
                     
                 funcBody = funcBodyLine + " ".join(funcContent)    
@@ -194,8 +220,3 @@ class DocEngine(ParseEngineAbstract):
             docName = fn.getName(line[0])
             #retData.append(docNs + ';' + docName + ';' + docData)
             yield docNs, docName, docData
-
-# de = DocEngine("/home/krzysztof/manipulator.cpp")
-# d = de.parse()
-# for line in d:
-#     print(line)

@@ -1,0 +1,4 @@
+Coordinate;void setDirection(char dirn);
+NMEA_VTG;void setSpeedKmH(char *KmH);EMPTY
+TractionDriver;void onJoyChanged(const Joystick &newState);EMPTY
+CLASS;void func1(char *str, bool isConnected = false);doc line 1,
